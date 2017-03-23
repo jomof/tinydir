@@ -24,37 +24,34 @@ printf "%s\r\n" "  file: ${artifactId}.zip" >> ${manifest}
 printf "%s\r\n" "  sha256: ${headerzipsha}" >> ${manifest} 
 printf "%s\r\n" "  size: ${headerzipsize}" >> ${manifest} 
 printf "%s\r\n" "example: |" >> ${manifest} 
-printf "%s\r\n" "example: |" >> ${manifest} 
-printf "%s\r\n" "  #include <stdio.h>
-printf "%s\r\n" "  #include <tinydir.h>
-printf "%s\r\n" "  int main(void) {
-printf "%s\r\n" "  	 tinydir_dir dir;
-printf "%s\r\n" "   	if (tinydir_open(&dir, ".") == -1)	{
-printf "%s\r\n" "  		perror("Error opening file");
-printf "%s\r\n" "  		goto bail;
-printf "%s\r\n" "  	}
-printf "%s\r\n" "  	while (dir.has_next) {
-printf "%s\r\n" "   		tinydir_file file;
-printf "%s\r\n" "   		if (tinydir_readfile(&dir, &file) == -1)		{
-printf "%s\r\n" "  			perror("Error getting file");
-printf "%s\r\n" "  			goto bail;
-printf "%s\r\n" "  	}
-printf "%s\r\n" " 		printf("%s", file.name);
-printf "%s\r\n" "  	if (file.is_dir)	{
-printf "%s\r\n" "  			printf("/");
-printf "%s\r\n" "  	}
-printf "%s\r\n" "  	printf("\n");
-printf "%s\r\n" "  		if (tinydir_next(&dir) == -1)
-		{
-			perror("Error getting next file");
-			goto bail;
-		}
-	}
-
-bail:
-	tinydir_close(&dir);
-	return 0;
-}
+printf "%s\r\n" "  #include <stdio.h>" >> ${manifest} 
+printf "%s\r\n" "  #include <tinydir/tinydir.h>" >> ${manifest} 
+printf "%s\r\n" "  int main(void) {" >> ${manifest} 
+printf "%s\r\n" "    tinydir_dir dir;" >> ${manifest} 
+printf "%s\r\n" "    if (tinydir_open(&dir, \".\") == -1) {" >> ${manifest} 
+printf "%s\r\n" "      perror(\"Error opening file\");" >> ${manifest} 
+printf "%s\r\n" "      goto bail;" >> ${manifest} 
+printf "%s\r\n" "    }" >> ${manifest} 
+printf "%s\r\n" "    while (dir.has_next) {" >> ${manifest} 
+printf "%s\r\n" "      tinydir_file file;" >> ${manifest} 
+printf "%s\r\n" "      if (tinydir_readfile(&dir, &file) == -1)	{" >> ${manifest} 
+printf "%s\r\n" "        perror(\"Error getting file\");" >> ${manifest} 
+printf "%s\r\n" "        goto bail;" >> ${manifest} 
+printf "%s\r\n" "      }" >> ${manifest} 
+printf "%s\r\n" "      printf(\"%s\", file.name);" >> ${manifest} 
+printf "%s\r\n" "      if (file.is_dir)	{" >> ${manifest} 
+printf "%s\r\n" "        printf(\"/\");" >> ${manifest} 
+printf "%s\r\n" "      }" >> ${manifest} 
+printf "%s\r\n" "      printf(\"\n\");" >> ${manifest} 
+printf "%s\r\n" "      if (tinydir_next(&dir) == -1) {" >> ${manifest} 
+printf "%s\r\n" "        perror(\"Error getting next file\");" >> ${manifest} 
+printf "%s\r\n" "        goto bail;" >> ${manifest} 
+printf "%s\r\n" "      }" >> ${manifest} 
+printf "%s\r\n" "    }" >> ${manifest} 
+printf "%s\r\n" "    bail:" >> ${manifest} 
+printf "%s\r\n" "      tinydir_close(&dir);" >> ${manifest} 
+printf "%s\r\n" "      return 0;" >> ${manifest} 
+printf "%s\r\n" "    }" >> ${manifest} 
 
 
  
