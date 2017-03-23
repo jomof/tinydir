@@ -22,3 +22,4 @@ before_script:
 script:
   - mkdir build && cd build && cmake ../samples && make -j2 && cd .. && rm -rf build
   - mkdir build && cd build && cmake ../tests && make -j2 && make test && cd .. && rm -rf build
+  - ./package_single_header

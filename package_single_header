@@ -1,0 +1,27 @@
+# Script that packages a single header into a cdep package
+
+groupId=com.github.jomof
+artifactId=tinydir
+version=${TRAVIS_TAG:-0.0.0}
+
+mkdir -p zip/include/${artifactId}
+mkdir package/
+cp ${artifactId}.h zip/include/${artifactId}/
+pushd zip
+zip -r ../package/${artifactId}.zip .
+popd
+
+headerzipsha=$(shasum -a 256 package/${artifactId}.zip | awk '{print $1}')
+headerzipsize=$(stat --printf="%s" package/${artifactId}.zip)
+
+manifest="package/cdep-manifest.yml"
+printf "%s\r\n" "coordinate:" > ${manifest}
+printf "%s\r\n" "  groupId: ${groupId}" >> ${manifest}
+printf "%s\r\n" "  artifactId: ${artifactId}" >> ${manifest}
+printf "%s\r\n" "  version: ${version}" >> ${manifest}
+printf "%s\r\n" "archive:" >> ${manifest} 
+printf "%s\r\n" "  file: firebase-include.zip" >> ${manifest} 
+printf "%s\r\n" "  sha256: ${headerzipsha}" >> ${manifest} 
+printf "%s\r\n" "  size: ${headerzipsize}" >> ${manifest} 
+
+ 
