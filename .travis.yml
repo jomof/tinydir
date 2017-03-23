@@ -1,25 +1,26 @@
 sudo: false
-
 language: c
-
 compiler:
-  - gcc
-  - clang
-
+- gcc
+- clang
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - gcc-4.8
-
 before_script:
-    # force newer gcc version
-  - if [ "$CC" = "gcc" ]; then export CC="gcc-4.8"; fi
-    # show which tests failed
-  - export CTEST_OUTPUT_ON_FAILURE=1
-
+- if [ "$CC" = "gcc" ]; then export CC="gcc-4.8"; fi
+- export CTEST_OUTPUT_ON_FAILURE=1
 script:
-  - mkdir build && cd build && cmake ../samples && make -j2 && cd .. && rm -rf build
-  - mkdir build && cd build && cmake ../tests && make -j2 && make test && cd .. && rm -rf build
-  - ./package_single_header
+- mkdir build && cd build && cmake ../samples && make -j2 && cd .. && rm -rf build
+- mkdir build && cd build && cmake ../tests && make -j2 && make test && cd .. && rm
+  -rf build
+- "./package_single_header"
+deploy:
+  provider: releases
+  api_key:
+    secure: hR0NtaCb7cnU/uZQRpy21uuciGRfpwUMQtLLdhA1WcfGD3TnZxymUWZpcV+lKDoFbcxMDXuqjF8sqi7K0OUmgWkwNHv+2sTS1e8mWixmiYeHmzAjOD7L9aLrhJ3wamX30imsQEDf4CyrIlCe3Dj7giL72j4NDjOYugYY1ghJJvbdQE5GSwfgUw4h/vIsPeAxk7SQ1BlRNpJIsGWJf1dbQbDXUhrrTQU4Bjqy4h1Yj9Y8dBbDuZ+34GWG2NBzD4CRjLfr0zqQFm3vZv1+Upp9bo9ePRGr7IY+DjVlGmWVkKupgZ80K0wPprQ0Ami/ujfbugQLZb+Oaoes/PJxqoYXYPv778RRYVZEd1STqfKnL2/ZPw8acxiPSA0IT3DLOj+zEQEwk/rLoDKaMFbinUcuLtG2ZOOxVd1U0oS4EvAw3GbXQgVIwmRgBkUE/fqv6CK1L94Pb0FjfSwANb8qJtX7c/Yf5c3a7c7KLc1GEcNhGt/tI1AqqsHoppT+uJSGy3BlytGVWf2cAeArK9yMo7+HlZSnVaqqiQXBQF4MhddTxRFDoZd7fmFNS/yuRTQyF5W7CRCBwHCsE1lmgELiborezuY7I9fO5QUpVtYJMTEaSZSIg297FQEva9qlCFBV27BvltN8oO06DwTeUsPy3smjZowKwhhmE7Fj/cv4wAImdls=
+  file: bb
+  on:
+    repo: jomof/tinydir
