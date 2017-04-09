@@ -4,7 +4,7 @@ coordinate:
   version: ${version}
 interfaces:
   headers:
-    file: ${source}/tinydir.h
+    file: ${source}/tinydir.h -> tinydir/tinydir.h
 example: |
   #include <stdio.h>
   #include <tinydir/tinydir.h>
