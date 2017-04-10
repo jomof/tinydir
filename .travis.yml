@@ -1,22 +1,6 @@
-sudo: false
 language: c
-compiler:
-- gcc
-- clang
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - gcc-4.8
-before_script:
-- if [ "$CC" = "gcc" ]; then export CC="gcc-4.8"; fi
-- export CTEST_OUTPUT_ON_FAILURE=1
 fail_fast: true
 script:
-  - mkdir build && cd build && cmake ../samples && make -j2 && cd .. && rm -rf build
-  - mkdir build && cd build && cmake ../tests && make -j2 && make test && cd .. && rm -rf build
-  
   - ./cdep fullfill . ${TRAVIS_TAG:-0.0.0} cdep-manifest.yml
   - ./cdep
   - ./cmakeify -wf .cdep/examples/cmake  --group-id com.github.jomof --artifact-id tinydir-examples --target-version 0.0.0
