@@ -6,3 +6,4 @@ script:
   - ./cmakeify -wf .cdep/examples/cmake  --group-id com.github.jomof --artifact-id tinydir-examples --target-version 0.0.0
   - git clone https://github.com/jomof/tools
   - tools/github_release_folder jomof tinydir .cdep/fullfill/output/layout
+  
