@@ -2,6 +2,8 @@ coordinate:
   groupId: com.github.jomof
   artifactId: tinydir
   version: ${version}
+license:
+  name: BSD 2-clause
 interfaces:
   headers:
     file: ${source}/tinydir.h -> tinydir/tinydir.h
